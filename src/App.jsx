@@ -1,17 +1,8 @@
 import { useState }  from 'react'
 import ReactDOM from 'react-dom/client'
-
-const Home = () => (
-  <div> <h2>TKTL notes app</h2> </div>
-)
-
-const Notes = () => (
-  <div> <h2>Notes</h2> </div>
-)
-
-const Users = () => (
-  <div> <h2>Users</h2> </div>
-)
+import Home from './components/Home'
+import Notes from './components/Notes'
+import Users from './components/Users'
 
 const App = () => {
   const [page, setPage] = useState('home')
@@ -25,7 +16,7 @@ const App = () => {
     if (page === 'home') {
       return <Home />
     } else if (page === 'notes') {
-      return <Notes />
+      return <Notes/>
     } else if (page === 'users') {
       return <Users />
     }
