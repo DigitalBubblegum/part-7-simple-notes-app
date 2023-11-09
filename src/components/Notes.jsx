@@ -4,10 +4,9 @@ const Notes = ({notes}) =>{
   <div>
     <h2>Notes</h2>
     <ul>
-      {notes.map(note =>{
-        console.log(note.content)
-        {<li> {note.content} </li>}
-      })}
+      {notes.map((note) => (
+          <li key={note.id}> {note.content} </li>
+        ))}
     </ul>
   </div>
 )
