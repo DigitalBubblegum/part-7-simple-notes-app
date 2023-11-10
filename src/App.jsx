@@ -2,7 +2,7 @@ import { useState }  from 'react'
 import Home from './components/Home'
 import Notes from './components/Notes'
 import Users from './components/Users'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate  } from "react-router-dom";
+import { BrowserRouter as Routes, Route, Link, Navigate, useMatch } from "react-router-dom";
 import { getNotes } from './requests'
 import Login from './components/Login';
 import Note from './components/Note';
@@ -23,8 +23,13 @@ const App = () => {
     console.log('in fetchnotes',typeof notes)
   }
 
+  const match = useMatch('/notes/:id')
+  const note = match 
+    ? notes.find(note => note.id === Number(match.params.id))
+    : null
+
   return (
-    <Router>
+    <div>
       <div>
         <Link style={padding} to ='/'>home</Link>
         <Link style={padding} to ='/notes' onClick={fetchNotesFromDB}>notes</Link>
@@ -35,7 +40,7 @@ const App = () => {
         }
       </div>
       <Routes>
-        <Route path="/notes/:id" element={<Note notes={notes} />} />
+       <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path = '/notes' element = {<Notes notes={notes}/>}/>
         <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
         <Route path="/login" element={<Login onLogin={login} />} />
@@ -44,7 +49,7 @@ const App = () => {
       <div>
         <i>Note app, Computer Science 2023</i>
       </div>
-    </Router>
+    </div>
   )
 }
 
