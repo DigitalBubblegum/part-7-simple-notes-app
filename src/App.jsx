@@ -2,13 +2,13 @@ import { useState }  from 'react'
 import Home from './components/Home'
 import Notes from './components/Notes'
 import Users from './components/Users'
-import { BrowserRouter as Routes, Route, Link, Navigate, useMatch } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useMatch } from "react-router-dom";
 import { getNotes } from './requests'
 import Login from './components/Login';
 import Note from './components/Note';
 
 const App = () => {
-  const [notes, setNotes] = useState([{content:'hello',important:'',id:''}])
+  const [notes, setNotes] = useState([{content:'hello',important:'',id:null}])
   const [user, setUser] = useState(null)
    const login = (user) => {
     setUser(user)

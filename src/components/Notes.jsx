@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 const Notes = ({notes}) =>{
   console.log('in notes',notes)
+  console.log(notes.map(note=>note))
   return(
   <div>
     <h2>Notes</h2>
