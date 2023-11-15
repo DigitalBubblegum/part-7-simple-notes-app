@@ -6,12 +6,18 @@ import { Routes, Route, Link, Navigate, useMatch } from "react-router-dom";
 import { getNotes } from './requests'
 import Login from './components/Login';
 import Note from './components/Note';
+import Notification from './components/Notification';
 
 const App = () => {
   const [notes, setNotes] = useState([{content:'hello',important:'',id:null}])
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
    const login = (user) => {
     setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
   }
   const padding = {
     padding: 5
@@ -30,12 +36,13 @@ const App = () => {
 
   return (
     <div className="container">
+      <Notification message={message}/>
       <div>
         <Link style={padding} to ='/'>home</Link>
         <Link style={padding} to ='/notes' onClick={fetchNotesFromDB}>notes</Link>
         <Link style={padding} to ='/users'>users</Link>
         {user
-            ? <em>{user} logged in</em>
+            ? null
             : <Link style={padding} to="/login">login</Link>
         }
       </div>
