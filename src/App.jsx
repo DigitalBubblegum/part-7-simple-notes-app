@@ -7,6 +7,7 @@ import { getNotes } from './requests'
 import Login from './components/Login';
 import Note from './components/Note';
 import Notification from './components/Notification';
+import { Navbar,Nav } from 'react-bootstrap';
 
 const App = () => {
   const [notes, setNotes] = useState([{content:'hello',important:'',id:null}])
@@ -37,15 +38,28 @@ const App = () => {
   return (
     <div className="container">
       <Notification message={message}/>
-      <div>
-        <Link style={padding} to ='/'>home</Link>
-        <Link style={padding} to ='/notes' onClick={fetchNotesFromDB}>notes</Link>
-        <Link style={padding} to ='/users'>users</Link>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/">home</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/notes" onClick={fetchNotesFromDB}>notes</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/users">users</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
         {user
-            ? null
-            : <Link style={padding} to="/login">login</Link>
+          ? <em style={padding}>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
         }
-      </div>
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
       <Routes>
        <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path = '/notes' element = {<Notes notes={notes}/>}/>
